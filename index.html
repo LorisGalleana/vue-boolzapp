@@ -17,7 +17,7 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="page-container">
+    <div id="container" class="page-container">
         <div class="bg-upperbar"></div>
         <div class="bg-maincolor"></div>
         <div class="app-window">
@@ -60,7 +60,19 @@
                     </div>
                 </div>
                 <div class="contact-list">
-                    <div class="friend-select">
+                    <div class="friend-select" v-for="(friend, index) in contacts" :key="index" @click="selectContact(index)">
+                        <div class="friend">
+                            <div class="photo">
+                                <img :src="friend.avatar" alt="">
+                            </div>
+                            <div class="friend-info">
+                                <div class="name">{{friend.name}} </div>
+                                <div class="last-message">Ultimo messaggio inviato</div>
+                            </div>
+                            <div class="hour-message">12:00</div>
+                        </div>
+                    </div>
+                    <!-- <div class="friend-select">
                         <div class="friend">
                             <div class="photo">
                                 <img src="img/trivette.jpeg" alt="">
@@ -143,19 +155,7 @@
                             </div>
                             <div class="hour-message">12:00</div>
                         </div>
-                    </div>
-                    <div class="friend-select">
-                        <div class="friend">
-                            <div class="photo">
-                                <img src="img/trivette.jpeg" alt="">
-                            </div>
-                            <div class="friend-info">
-                                <div class="name">Trivette</div>
-                                <div class="last-message">Ultimo messaggio inviato</div>
-                            </div>
-                            <div class="hour-message">12:00</div>
-                        </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="message-window">
@@ -163,11 +163,11 @@
                     <div class="friend-contact-container">
                         <div class="friend">
                             <div class="photo">
-                                <img src="img/trivette.jpeg" alt="">
+                                <img :src="contacts[currentContactIndex].avatar" alt="">
                             </div>
-                            <div class="friend-info">
-                                <div class="name">Trivette</div>
-                                <div class="last-access">Ultimo accesso oggi alle 12:00</div>
+                            <div class="friend-info" >
+                                <div class="name">{{contacts[currentContactIndex].name}}</div>
+                                <div class="last-access">{{contacts[currentContactIndex].messages[0].date}}</div>
                             </div>
                         </div>
                         <div class="friend-icons">
@@ -184,11 +184,11 @@
                     </div>
                 </div>
                 <div class="chat">
-                    <div class="personal-message">
-                        <p>Hai portato a spasso il cane?</p>
-                        <p class="hour">15.30</p>
+                    <div v-for="(message, index) in contacts[currentContactIndex].messages" :key="index" :class="message.status === 'sent' ? 'personal-message' : 'friend-message' ">
+                        <p>{{message.message}}</p>
+                        <p class="hour">{{message.date}}</p>
                     </div>
-                    <div class="personal-message">
+                    <!-- <div class="personal-message">
                         <p>Ricordati di stendere i panni</p>
                         <p class="hour">15.50</p>
                     </div>
@@ -203,7 +203,7 @@
                     <div class="friend-message">
                         <p>Tutto fatto!</p>
                         <p class="hour">16.15</p>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="message-bar">
                     <div class="message-container">
