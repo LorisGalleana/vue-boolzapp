@@ -1,4 +1,5 @@
 const { createApp } = Vue;
+const { DateTime } = luxon;
 
 createApp({
     data() {
@@ -173,6 +174,11 @@ createApp({
     methods: {
         selectContact(index) {
             this.currentContactIndex = index;
+        },
+        formatTime(dateString) {
+            const dateTime = DateTime.fromFormat(dateString, 'dd/MM/yyyy HH:mm:ss');
+            return dateTime.toFormat('HH:mm:ss');
         }
-    }
+    },
+        
 }).mount("#container");
