@@ -58,11 +58,11 @@
                 </div>
                 <div class="search-bar">
                     <div class="search-container">
-                        <input type="text" name="" id="" placeholder="Cerca o inizia una nuova chat">
+                        <input type="text" v-model="searchQuery" placeholder="Cerca o inizia una nuova chat">
                     </div>
                 </div>
                 <div class="contact-list">
-                    <div class="friend-select" v-for="(friend, index) in contacts" :key="index" @click="selectContact(index)">
+                    <div class="friend-select" v-for="(friend, index) in filteredContacts" :key="index" @click="selectContact(index)">
                         <div class="friend">
                             <div class="photo">
                                 <img :src="friend.avatar" alt="">
@@ -71,93 +71,9 @@
                                 <div class="name">{{friend.name}} </div>
                                 <div class="last-message">Ultimo messaggio inviato</div>
                             </div>
-                            <div class="hour-message">12:00</div>
+                            <div class="hour-message">{{formatTime(friend.messages[friend.messages.length - 1].date)}}</div>
                         </div>
                     </div>
-                    <!-- <div class="friend-select">
-                        <div class="friend">
-                            <div class="photo">
-                                <img src="img/trivette.jpeg" alt="">
-                            </div>
-                            <div class="friend-info">
-                                <div class="name">Trivette</div>
-                                <div class="last-message">Ultimo messaggio inviato</div>
-                            </div>
-                            <div class="hour-message">12:00</div>
-                        </div>
-                    </div>
-                    <div class="friend-select">
-                        <div class="friend">
-                            <div class="photo">
-                                <img src="img/trivette.jpeg" alt="">
-                            </div>
-                            <div class="friend-info">
-                                <div class="name">Trivette</div>
-                                <div class="last-message">Ultimo messaggio inviato</div>
-                            </div>
-                            <div class="hour-message">12:00</div>
-                        </div>
-                    </div>
-                    <div class="friend-select">
-                        <div class="friend">
-                            <div class="photo">
-                                <img src="img/trivette.jpeg" alt="">
-                            </div>
-                            <div class="friend-info">
-                                <div class="name">Trivette</div>
-                                <div class="last-message">Ultimo messaggio inviato</div>
-                            </div>
-                            <div class="hour-message">12:00</div>
-                        </div>
-                    </div>
-                    <div class="friend-select">
-                        <div class="friend">
-                            <div class="photo">
-                                <img src="img/trivette.jpeg" alt="">
-                            </div>
-                            <div class="friend-info">
-                                <div class="name">Trivette</div>
-                                <div class="last-message">Ultimo messaggio inviato</div>
-                            </div>
-                            <div class="hour-message">12:00</div>
-                        </div>
-                    </div>
-                    <div class="friend-select">
-                        <div class="friend">
-                            <div class="photo">
-                                <img src="img/trivette.jpeg" alt="">
-                            </div>
-                            <div class="friend-info">
-                                <div class="name">Trivette</div>
-                                <div class="last-message">Ultimo messaggio inviato</div>
-                            </div>
-                            <div class="hour-message">12:00</div>
-                        </div>
-                    </div>
-                    <div class="friend-select">
-                        <div class="friend">
-                            <div class="photo">
-                                <img src="img/trivette.jpeg" alt="">
-                            </div>
-                            <div class="friend-info">
-                                <div class="name">Trivette</div>
-                                <div class="last-message">Ultimo messaggio inviato</div>
-                            </div>
-                            <div class="hour-message">12:00</div>
-                        </div>
-                    </div>
-                    <div class="friend-select">
-                        <div class="friend">
-                            <div class="photo">
-                                <img src="img/trivette.jpeg" alt="">
-                            </div>
-                            <div class="friend-info">
-                                <div class="name">Trivette</div>
-                                <div class="last-message">Ultimo messaggio inviato</div>
-                            </div>
-                            <div class="hour-message">12:00</div>
-                        </div>
-                    </div> -->
                 </div>
             </div>
             <div class="message-window">
@@ -189,31 +105,23 @@
                     <div v-for="(message, index) in contacts[currentContactIndex].messages" :key="index" :class="message.status === 'sent' ? 'personal-message' : 'friend-message' ">
                         <p>{{message.message}}</p>
                         <p class="hour">{{formatTime(message.date)}}</p>
+                        <div class="dropdown " >
+                            <i class="fa-solid fa-chevron-down hide" @click="toggleDropdown(message)" ></i>
+                            <div class="dropdown-menu" :class="{'active': message.dropdownOpen}" >
+                                <p class="bottom-border">Message info</p>
+                                <p @click="removeMessage(index)">Delete message</p>
+                            </div>
+                        </div>
                     </div>
-                    <!-- <div class="personal-message">
-                        <p>Ricordati di stendere i panni</p>
-                        <p class="hour">15.50</p>
-                    </div>
-                    <div class="friend-message">
-                        <p>Tutto fatto!</p>
-                        <p class="hour">16.15</p>
-                    </div>
-                    <div class="personal-message">
-                        <p>Ricordati di stendere i panni</p>
-                        <p class="hour">15.50</p>
-                    </div>
-                    <div class="friend-message">
-                        <p>Tutto fatto!</p>
-                        <p class="hour">16.15</p>
-                    </div> -->
+                    
                 </div>
                 <div class="message-bar">
                     <div class="message-container">
                         <div class="emoticon">
                             <i class="fa-regular fa-face-smile"></i>
                         </div>
-                        <div class="message">
-                            <input type="text" name="" id="" placeholder="Scrivi un messaggio">
+                        <div class="message"  @keyup.enter="addMessage">
+                            <input type="text" name="" id="" placeholder="Scrivi un messaggio" v-model="newMessage">
                         </div>
                         <div class="microphone">
                             <i class="fa-solid fa-microphone"></i>
