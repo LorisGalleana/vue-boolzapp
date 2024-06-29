@@ -160,6 +160,7 @@ COLORE MESSAGGI PERSONALI - tea green: rgb(213, 249, 186) */
 }
 .friend .photo img {
     width: 100%;
+    height: 100%;
     border-radius: 50%;
 }
 .friend .name {
