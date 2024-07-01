@@ -20,10 +20,13 @@
 </head>
 <body>
     <div id="container" class="page-container">
-        <div class="bg-upperbar"></div>
-        <div class="bg-maincolor"></div>
+        
+        <div class="bg-upperbar"></div><!-- barra verde di sfondo in alto -->
+        <div class="bg-maincolor"></div><!-- principale colore di sfondo dietro l'app -->
         <div class="app-window">
+            <!-- barra laterale sinistra con i contatti -->
             <div class="contact-window">
+                <!-- area con la foto dell'utente e tre icone -->
                 <div class="user-contact-bar">
                     <div class="user-contact-container">
                         <div class="user">
@@ -45,6 +48,7 @@
                         </div>
                     </div>
                 </div>
+                <!-- barra per arrivare notifiche desktop -->
                 <div class="notification-alarm">
                     <div class="notification-container">
                         <div class="notification-bell">
@@ -56,11 +60,13 @@
                         </div>
                     </div>
                 </div>
+                <!-- campo di ricerca per filtrare i contatti -->
                 <div class="search-bar">
                     <div class="search-container">
                         <input type="text" v-model="searchQuery" placeholder="Cerca o inizia una nuova chat">
                     </div>
                 </div>
+                <!-- lista di conversazioni con almeno un messaggio -->
                 <div class="contact-list">
                     <div class="friend-select" v-for="(friend, index) in filteredContacts" :key="index" @click="selectContact(index)">
                         <div class="friend">
@@ -76,7 +82,9 @@
                     </div>
                 </div>
             </div>
+            <!-- area principale a destra che mostra la chat con il contatto selezionato -->
             <div class="message-window">
+                <!-- area contenente nome,foto,ora dell'ultimo messaggio scambiato con il contatto selezionato -->
                 <div class="friend-contact-bar">
                     <div class="friend-contact-container">
                         <div class="friend">
@@ -101,11 +109,12 @@
                         </div>
                     </div>
                 </div>
+                <!-- chat, area contenente tutti i messaggi inviati e ricevuti -->
                 <div class="chat">
                     <div v-for="(message, index) in contacts[currentContactIndex].messages" :key="index" :class="message.status === 'sent' ? 'personal-message' : 'friend-message' ">
-                        <p>{{message.message}}</p>
-                        <p class="hour">{{formatTime(message.date)}}</p>
-                        <div class="dropdown " >
+                        <p>{{message.message}}</p><!-- contentuo messaggio -->
+                        <p class="hour">{{formatTime(message.date)}}</p><!-- ora di invio/ricezione messaggio -->
+                        <div class="dropdown " ><!-- freccetta bassa a comparsa in hover che permette di cancellare il messaggio -->
                             <i class="fa-solid fa-chevron-down hide" @click="toggleDropdown(message)" ></i>
                             <div class="dropdown-menu" :class="{'active': message.dropdownOpen}" >
                                 <p class="bottom-border">Message info</p>
@@ -115,6 +124,7 @@
                     </div>
                     
                 </div>
+                <!-- barra per l'invio dei messaggi, a sinistra icona per le emoji e a destra microfono per mandare messaggi vocali -->
                 <div class="message-bar">
                     <div class="message-container">
                         <div class="emoticon">
@@ -132,10 +142,6 @@
         </div>
     </div>
 </body>
-
-
-
-
 <script type="text/javascript" src="functions.js"></script>
 <script type="text/javascript" src="app.js"></script>
 <script type="text/javascript" src="myscript.js"></script>
