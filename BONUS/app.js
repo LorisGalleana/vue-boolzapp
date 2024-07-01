@@ -400,10 +400,17 @@ createApp({
             this.contacts[this.currentContactIndex].messages.splice(index, 1);
         },
         removeAllMessages() {
-            if (this.contacts[this.currentContactIndex] && this.contacts[this.currentContactIndex].messages) {
-                this.contacts[this.currentContactIndex].messages.splice(0, this.contacts[this.currentContactIndex].messages.length);
-            }
+            this.contacts[this.currentContactIndex].messages = [];
         },
+        removeContact() {
+            if (this.contacts.length > 1) { // Assicurati che ci sia almeno un contatto rimanente
+                this.contacts.splice(this.currentContactIndex, 1); // Rimuovi il contatto corrente dall'array principale
+                this.currentContactIndex = 0; // Rimetti l'indice del contatto attivo al primo della lista, se necessario
+            } else {
+                this.contacts = []; 
+            }
+        }
+        ,
         randomAnswerGenerator() {
             let min = 0;
             let max = this.randomQuotes.length;

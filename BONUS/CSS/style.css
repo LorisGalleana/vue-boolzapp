@@ -268,7 +268,7 @@ COLORE MESSAGGI PERSONALI - tea green: rgb(213, 249, 186) */
     font-size: 12px;
     filter: opacity(0.5);
 }
-.dropdown {
+.chat .dropdown {
     width: 6%;
     height: 41%;
     position: absolute;
@@ -285,7 +285,18 @@ COLORE MESSAGGI PERSONALI - tea green: rgb(213, 249, 186) */
 .dropdown:hover .hide {
     display: inline-block;
 }
-.dropdown-menu {
+.friend-icons .dropdown-menu {
+    width: 200px;
+    height: fit-content;
+    background-color: white;
+    position: absolute;
+    top: 100%;
+    right: -45%;
+    display: none;
+    z-index: 1;
+    padding: 5px;
+}
+.chat .dropdown-menu {
     width: 124px;
     height: fit-content;
     background-color: white;

@@ -71,14 +71,14 @@
                     <div class="friend-select" v-for="(friend, index) in filteredContacts" :key="index" @click="selectContact(index)">
                         <div class="friend">
                             <div class="photo">
-                                <img :src="friend.avatar" alt="">
+                                <img :src="friend ? friend.avatar : '' " alt="">
                             </div>
                             <div class="friend-info">
-                                <div class="name">{{friend.name}} </div>
-                                <div class="last-message">{{ getLastMessage(friend) }}
+                                <div class="name">{{friend ? friend.name : ''}} </div>
+                                <div class="last-message">{{friend ? getLastMessage(friend) : ''}}
                                 </div>
                             </div>
-                            <div class="hour-message">{{formatTime(friend.messages[friend.messages.length - 1].date)}}</div>
+                            <div class="hour-message">{{message ? formatTime(friend.messages[friend.messages.length - 1].date)   : " "}}</div>
                         </div>
                     </div>
                 </div>
@@ -90,14 +90,14 @@
                     <div class="friend-contact-container">
                         <div class="friend">
                             <div class="photo">
-                                <img :src="contacts[currentContactIndex].avatar" alt="">
+                                <img :src="contacts[currentContactIndex] ? contacts[currentContactIndex].avatar : ''" alt="">
                             </div>
                             <div class="friend-info" >
-                                <div class="name">{{contacts[currentContactIndex].name}}</div>
+                                <div class="name">{{contacts[currentContactIndex] ? contacts[currentContactIndex].name : ''}}</div>
                                 <div class="last-access">
                                     <div v-if="isWriting">Sta scrivendo...</div>
                                     <div v-else-if="isOnline">Online</div>
-                                    <div v-else>{{contacts[currentContactIndex].messages[contacts[currentContactIndex].messages.length - 1].date}}</div> 
+                                    <div v-else>{{contacts.message ? contacts[currentContactIndex].messages[contacts[currentContactIndex].messages.length - 1].date   : " "}}</div> 
                                 </div>
                             </div>
                         </div>
@@ -108,30 +108,28 @@
                             <div class="attach">
                                 <i class="fa-solid fa-paperclip"></i>
                             </div>
-                            <div class="options" @click="removeAllMessages()">
-                                <i class="fa-solid fa-ellipsis-vertical"></i>
+                            <div class="options " >
+                                <i class="fa-solid fa-ellipsis-vertical" @click="toggleDropdown(contacts[currentContactIndex])"></i>
+                                <div class="dropdown-menu" :class="{ 'active': contacts[currentContactIndex].dropdownOpen }">
+                                    <p class="bottom-border" @click="removeAllMessages">Cancella messaggi</p>
+                                    <p @click="removeContact">Elimina contatto</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- chat, area contenente tutti i messaggi inviati e ricevuti -->
                 <div class="chat">
-                    <div v-if="contacts[currentContactIndex].messages && contacts[currentContactIndex].messages.length > 0">
-                        <div v-for="(message, index) in contacts[currentContactIndex].messages" :key="index" :class="message.status === 'sent' ? 'personal-message' : 'friend-message'">
-                            <p>{{ message.message }}</p><!-- Contenuto del messaggio -->
-                            <p class="hour">{{ formatTime(message.date) }}</p><!-- Ora di invio/ricezione del messaggio -->
-                            <div class="dropdown">
-                                <i class="fa-solid fa-chevron-down hide" @click="toggleDropdown(message)"></i>
-                                <div class="dropdown-menu" :class="{ 'active': message.dropdownOpen }">
-                                    <p class="bottom-border">Message info</p>
-                                    <p @click="removeMessage(index)">Delete message</p>
-                                </div>
+                    <div v-for="(message, index) in contacts[currentContactIndex].messages" :key="index" :class="message.status === 'sent' ? 'personal-message' : 'friend-message'">
+                        <p>{{message ?  message.message : " "}}</p><!-- Contenuto del messaggio -->
+                        <p class="hour">{{message ?  formatTime(message.date)  : " "}}</p><!-- Ora di invio/ricezione del messaggio -->
+                        <div class="dropdown">
+                            <i class="fa-solid fa-chevron-down hide" @click="toggleDropdown(message)"></i>
+                            <div class="dropdown-menu" :class="{ 'active': message.dropdownOpen }">
+                                <p class="bottom-border">Message info</p>
+                                <p @click="removeMessage(index)">Delete message</p>
                             </div>
                         </div>
-                    </div>
-                    <div v-else>
-                        <!-- Messaggio che indica l'assenza di messaggi -->
-                        <p>Nessun messaggio disponibile.</p>
                     </div>
                 </div>
                 
