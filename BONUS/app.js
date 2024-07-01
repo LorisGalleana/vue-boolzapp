@@ -325,6 +325,8 @@ createApp({
                 "Sento il bisogno - il bisogno di velocità! - Top Gun",
                 "Mi stai parlando a me? - Taxi Driver"
             ],
+            isWriting: false,
+            isOnline: false
             
         }
     },
@@ -365,6 +367,7 @@ createApp({
                     status: 'sent', 
                     dropdownOpen: false
                 });
+                this.isWriting = true
                 setTimeout(() => {this.friendMessage()}, 1000)
             }
             this.newMessage = ''; //reimposta il campo invio dei messaggi a vuoto una volta mandato il messaggio
@@ -372,6 +375,11 @@ createApp({
         },
         /* formula per l'aggiunta del messaggio di risposta automatico da parte del contatto a cui si è mandato un messaggio */
         friendMessage() {
+            this.isWriting = false;
+            this.isOnline = true
+            setTimeout(() => {
+                this.online = false;
+            }, 5000);
             let randomQuote = this.randomAnswerGenerator();
             this.contacts[this.currentContactIndex].messages.push({
                 date: DateTime.now().toFormat('dd/MM/yyyy HH:mm:ss'), 
