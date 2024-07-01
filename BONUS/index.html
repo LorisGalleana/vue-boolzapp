@@ -108,7 +108,7 @@
                             <div class="attach">
                                 <i class="fa-solid fa-paperclip"></i>
                             </div>
-                            <div class="options">
+                            <div class="options" @click="removeAllMessages()">
                                 <i class="fa-solid fa-ellipsis-vertical"></i>
                             </div>
                         </div>
@@ -116,19 +116,25 @@
                 </div>
                 <!-- chat, area contenente tutti i messaggi inviati e ricevuti -->
                 <div class="chat">
-                    <div v-for="(message, index) in contacts[currentContactIndex].messages" :key="index" :class="message.status === 'sent' ? 'personal-message' : 'friend-message' ">
-                        <p>{{message.message}}</p><!-- contentuo messaggio -->
-                        <p class="hour">{{formatTime(message.date)}}</p><!-- ora di invio/ricezione messaggio -->
-                        <div class="dropdown " ><!-- freccetta bassa a comparsa in hover che permette di cancellare il messaggio -->
-                            <i class="fa-solid fa-chevron-down hide" @click="toggleDropdown(message)" ></i>
-                            <div class="dropdown-menu" :class="{'active': message.dropdownOpen}" >
-                                <p class="bottom-border">Message info</p>
-                                <p @click="removeMessage(index)">Delete message</p>
+                    <div v-if="contacts[currentContactIndex].messages && contacts[currentContactIndex].messages.length > 0">
+                        <div v-for="(message, index) in contacts[currentContactIndex].messages" :key="index" :class="message.status === 'sent' ? 'personal-message' : 'friend-message'">
+                            <p>{{ message.message }}</p><!-- Contenuto del messaggio -->
+                            <p class="hour">{{ formatTime(message.date) }}</p><!-- Ora di invio/ricezione del messaggio -->
+                            <div class="dropdown">
+                                <i class="fa-solid fa-chevron-down hide" @click="toggleDropdown(message)"></i>
+                                <div class="dropdown-menu" :class="{ 'active': message.dropdownOpen }">
+                                    <p class="bottom-border">Message info</p>
+                                    <p @click="removeMessage(index)">Delete message</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    
+                    <div v-else>
+                        <!-- Messaggio che indica l'assenza di messaggi -->
+                        <p>Nessun messaggio disponibile.</p>
+                    </div>
                 </div>
+                
                 <!-- barra per l'invio dei messaggi, a sinistra icona per le emoji e a destra microfono per mandare messaggi vocali -->
                 <div class="message-bar">
                     <div class="message-container">

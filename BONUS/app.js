@@ -243,10 +243,6 @@ createApp({
                     
                 }
             ],
-            currentContactIndex: 0,
-            newMessage: '',
-            searchQuery: '',
-            dropdownOpen: false, //status base per il menu a tendina per cancellare i messaggi, così che sia sempre chiuso finchè non clicchiamo sopra
             randomQuotes: [
                 "Che la Forza sia con te. - Star Wars",
                 "Facciamo un'offerta che non potrà rifiutare. - Il Padrino",
@@ -325,6 +321,10 @@ createApp({
                 "Sento il bisogno - il bisogno di velocità! - Top Gun",
                 "Mi stai parlando a me? - Taxi Driver"
             ],
+            currentContactIndex: 0,
+            newMessage: '',
+            searchQuery: '',
+            dropdownOpen: false, //status base per il menu a tendina per cancellare i messaggi, così che sia sempre chiuso finchè non clicchiamo sopra
             isWriting: false,
             isOnline: false
             
@@ -338,16 +338,6 @@ createApp({
             );
         }
     },
-    /* filters: {
-        truncateText(value, maxLength) {
-            const truncationLength = maxLength || 16; // Default a 16 se maxLength non è specificato
-            if (value.length <= truncationLength) {
-                return value;
-            } else {
-                return value.slice(0, truncationLength) + '...';
-            }
-        }
-    }, */
     methods: {
         /* funzione per selezionare quale chat aprire dalla lista dei contatti cliccando sopra al contatto corrispondente */
         selectContact(index) {
@@ -408,6 +398,11 @@ createApp({
         /* formula per rimuovere i messaggi usando il menu a tendina */
         removeMessage(index) {
             this.contacts[this.currentContactIndex].messages.splice(index, 1);
+        },
+        removeAllMessages() {
+            if (this.contacts[this.currentContactIndex] && this.contacts[this.currentContactIndex].messages) {
+                this.contacts[this.currentContactIndex].messages.splice(0, this.contacts[this.currentContactIndex].messages.length);
+            }
         },
         randomAnswerGenerator() {
             let min = 0;
