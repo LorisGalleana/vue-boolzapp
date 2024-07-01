@@ -356,7 +356,7 @@ createApp({
         /* formula per settare il formato HH:mm:ss tramite luxon */
         formatTime(dateString) {
             const dateTime = DateTime.fromFormat(dateString, 'dd/MM/yyyy HH:mm:ss');
-            return dateTime.toFormat('HH:mm:ss');
+            return dateTime.toFormat('HH:mm');
         },
         /* formula per aggiungere i messaggi alla chat una volta inviati e far partire la risposta automatica */
         addMessage() {
@@ -371,6 +371,12 @@ createApp({
                 setTimeout(() => {this.friendMessage()}, 1000)
             }
             this.newMessage = ''; //reimposta il campo invio dei messaggi a vuoto una volta mandato il messaggio
+            this.$nextTick(() => {
+                const messageContainer = document.querySelector('.chat');
+                if (messageContainer) {
+                    messageContainer.scrollTop = messageContainer.scrollHeight;
+                }
+            });
             
         },
         /* formula per l'aggiunta del messaggio di risposta automatico da parte del contatto a cui si è mandato un messaggio */
@@ -378,7 +384,7 @@ createApp({
             this.isWriting = false;
             this.isOnline = true
             setTimeout(() => {
-                this.online = false;
+                this.isOnline = false;
             }, 5000);
             let randomQuote = this.randomAnswerGenerator();
             this.contacts[this.currentContactIndex].messages.push({
@@ -386,6 +392,12 @@ createApp({
                 message: randomQuote, 
                 status: 'received',
                 dropdownOpen: false
+            });
+            this.$nextTick(() => {
+                const messageContainer = document.querySelector('.chat');
+                if (messageContainer) {
+                    messageContainer.scrollTop = messageContainer.scrollHeight;
+                }
             });
             
         },
