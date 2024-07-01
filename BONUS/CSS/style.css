@@ -1,0 +1,306 @@
+/* PALETTE
+UPPER BAR - persian green: rgb(0, 150, 136)
+BACKGROUND - timberwolf: rgb(218, 219, 212)
+CHAT UPPER BAR - platinum: rgb(234, 234, 234)
+NOTIFICHE ALARM - pale azure: rgb(142, 218, 252)
+CHAT BACKGROUND - timberwolf bis: rgb(225, 217, 210)
+COLORE MESSAGGI PERSONALI - tea green: rgb(213, 249, 186) */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.page-container {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+}
+.bg-upperbar {
+    height: 15vh;
+    background-color: rgb(0, 150, 136);
+}
+.bg-maincolor {
+    height: 85vh;
+    background-color:rgb(218, 219, 212) ;
+}
+.app-window {
+    background-color: white;
+    position: absolute;
+    width: 80%;
+    height: 95vh;
+    top: 3%;
+    left: 10%;
+    display: flex;
+}
+.contact-window {
+    width: 35%;
+    height: 100%;
+}
+.message-window {
+    width: 65%;
+    height: 100%;
+}
+.user-contact-bar, .friend-contact-bar {
+    width: 100%;
+    height: 10%;
+    background-color: rgb(234, 234, 234);
+}
+.contact-window .user-contact-bar {
+    border-right: 0.5px solid rgba(128, 128, 128, 0.44);
+}
+.chat {
+    width: 100%;
+    height: 80%;
+    background-image: url(../img/background.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 5%;
+    overflow: auto;
+}
+
+.message-bar {
+    width: 100%;
+    height: 10%;
+    background-color: rgb(234, 234, 234);
+}
+.notification-alarm {
+    width: 100%;
+    height: 10%;
+    background-color: rgb(142, 218, 252);
+}
+.search-bar {
+    width: 100%;
+    height: 8%;
+    background-color: rgb(234, 234, 234);
+}
+.contact-list {
+    width: 100%;
+    height: 72%;
+    background-color: white;
+    overflow: auto;
+}
+
+
+.message-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+}
+.emoticon, .microphone, .send-message {
+    margin: 0 3%;
+    filter: opacity(0.5);
+    width: 24px;
+}
+
+.message {
+    display: flex;
+    flex-grow: 1;
+}
+.message input[type="text"] {
+    border: none;
+    height: 32px;
+    flex-grow: 1;
+    padding: 0 15px;
+    font-size: 16px;
+    outline:none;
+}
+
+.user-contact-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+}
+.user {
+    display: flex;
+    margin-left: 3%;
+    align-items: center;
+    width: 40%;
+    gap: 10%;
+}
+.user .photo {
+    width: 50px;
+    height: 50px;
+}
+.user .photo img {
+    width: 100%;
+    border-radius: 50%;
+}
+.user .name {
+    font-size: 20px;
+    font-weight: bold;
+}
+.contact-icons {
+    display: flex;
+    margin-right: 15%;
+    gap: 30%;
+    font-size: 24px;
+    filter: opacity(0.5);
+}
+
+.friend-contact-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+}
+.friend {
+    display: flex;
+    margin-left: 3%;
+    align-items: center;
+    width: 40%;
+    gap: 5%;
+}
+.friend .photo {
+    width: 50px;
+    height: 50px;
+}
+.friend .photo img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+.friend .name {
+    font-size: 20px;
+    font-weight: bold;
+}
+.friend-icons {
+    display: flex;
+    margin-right: 8%;
+    gap: 30%;
+    font-size: 24px;
+    filter: opacity(0.5);
+}
+
+.notification-container{
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+.notification-bell{
+    width: 50px;
+    height: 50px;
+    background-color: white;
+    color: rgb(142, 218, 252);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin: 0 3%;
+}
+.receive-notification{
+    font-weight: bold;
+}
+.activate-notification{
+    color: black;
+    filter: opacity(0.5);
+}
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.search-container input[type="text"] {
+    display: flex;
+    width: 95%;
+    background-image: url(../img/magnifying-glass-solid.svg);
+    background-repeat: no-repeat;
+    border: none;
+    background-size: 4%;
+    background-position: 16px center;
+    height: 40px;
+    padding-left: 45px;
+}
+.friend-select {
+    height: 15%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.44);
+}
+.friend-select .friend {
+    width: 70%;
+}
+.last-message {
+    filter: opacity(0.7);
+}
+.hour-message {
+    position: absolute;
+    top: 5%;
+    right: 3%;
+    filter: opacity(0.5);
+}
+
+.personal-message {
+    text-align: end;
+    padding: 1.5% 2%;
+    background-color: rgb(213, 249, 186);
+    margin: 0 5% 2% 60%;
+    border-radius: 10px;
+    position: relative;
+}
+.personal-message p {
+    text-align: start;
+}
+.friend-message {
+    padding: 1.5% 2%;
+    margin: 0 60% 2% 5%;
+    background-color: white;
+    border-radius: 10px;
+    position: relative;
+}
+.hour {
+    position: absolute;
+    bottom: 0%;
+    right: 3%;
+    font-size: 12px;
+    filter: opacity(0.5);
+}
+.dropdown {
+    width: 6%;
+    height: 41%;
+    position: absolute;
+    top: 0%;
+    right: 3%;
+    cursor: pointer;
+}
+.fa-chevron-down {
+    font-size: 10px;
+}
+.hide {
+    display: none;
+}
+.dropdown:hover .hide {
+    display: inline-block;
+}
+.dropdown-menu {
+    width: 124px;
+    height: fit-content;
+    background-color: white;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    display: none;
+    z-index: 1;
+    padding: 5px;
+}
+.dropdown-menu.active {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.bottom-border {
+    border-bottom: 1px solid rgba(128, 128, 128, 0.44);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
