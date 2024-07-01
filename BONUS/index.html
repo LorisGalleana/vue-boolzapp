@@ -75,7 +75,8 @@
                             </div>
                             <div class="friend-info">
                                 <div class="name">{{friend.name}} </div>
-                                <div class="last-message">Ultimo messaggio inviato</div>
+                                <div class="last-message">{{ getLastMessage(friend) }}
+                                </div>
                             </div>
                             <div class="hour-message">{{formatTime(friend.messages[friend.messages.length - 1].date)}}</div>
                         </div>

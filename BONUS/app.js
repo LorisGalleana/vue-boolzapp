@@ -324,7 +324,8 @@ createApp({
                 "Sono solo una ragazza, in piedi di fronte a un ragazzo, chiedendogli di amarla. - Notting Hill",
                 "Sento il bisogno - il bisogno di velocità! - Top Gun",
                 "Mi stai parlando a me? - Taxi Driver"
-              ]
+            ],
+            
         }
     },
     computed: {
@@ -335,6 +336,16 @@ createApp({
             );
         }
     },
+    /* filters: {
+        truncateText(value, maxLength) {
+            const truncationLength = maxLength || 16; // Default a 16 se maxLength non è specificato
+            if (value.length <= truncationLength) {
+                return value;
+            } else {
+                return value.slice(0, truncationLength) + '...';
+            }
+        }
+    }, */
     methods: {
         /* funzione per selezionare quale chat aprire dalla lista dei contatti cliccando sopra al contatto corrispondente */
         selectContact(index) {
@@ -383,11 +394,22 @@ createApp({
             let max = this.randomQuotes.length;
             let randomNumber = Math.floor(Math.random() * (max - min)) + min;    
             return this.randomQuotes[randomNumber];       
+        },
+        truncateText(text, maxLength) {
+            if (text.length > maxLength) {
+              return text.slice(0, maxLength) + '...';
+            } else {
+              return text;
+            }
+          },
+        getLastMessage(friend) {
+            if (friend.messages.length > 0) {
+              const lastMessage = friend.messages[friend.messages.length - 1].message;
+              return this.truncateText(lastMessage, 30);
+            } else {
+              return '';
+            }
         }
-    },
-    mounted () {
-        console.log(this.randomQuote[this.randomAnswerGenerator()]);
-        
     }
 
         
