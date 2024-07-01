@@ -326,7 +326,8 @@ createApp({
             searchQuery: '',
             dropdownOpen: false, //status base per il menu a tendina per cancellare i messaggi, così che sia sempre chiuso finchè non clicchiamo sopra
             isWriting: false,
-            isOnline: false
+            isOnline: false,
+            message: ''
             
         }
     },
