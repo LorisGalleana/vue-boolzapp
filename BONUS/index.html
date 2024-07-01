@@ -131,10 +131,10 @@
                             <i class="fa-regular fa-face-smile"></i>
                         </div>
                         <div class="message"  @keyup.enter="addMessage">
-                            <input type="text" name="" id="" placeholder="Scrivi un messaggio" v-model="newMessage">
+                            <input type="text" placeholder="Scrivi un messaggio" v-model="newMessage">
                         </div>
                         <div class="send-message" v-if="newMessage">
-                            <i class="fa-regular fa-paper-plane"></i>
+                            <i class="fa-regular fa-paper-plane" @click="addMessage"></i>
                         </div>
                         <div class="microphone" v-else>
                             <i class="fa-solid fa-microphone"></i>

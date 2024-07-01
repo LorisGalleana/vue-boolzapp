@@ -246,7 +246,85 @@ createApp({
             currentContactIndex: 0,
             newMessage: '',
             searchQuery: '',
-            dropdownOpen: false //status base per il menu a tendina per cancellare i messaggi, così che sia sempre chiuso finchè non clicchiamo sopra
+            dropdownOpen: false, //status base per il menu a tendina per cancellare i messaggi, così che sia sempre chiuso finchè non clicchiamo sopra
+            randomQuotes: [
+                "Che la Forza sia con te. - Star Wars",
+                "Facciamo un'offerta che non potrà rifiutare. - Il Padrino",
+                "Tu non puoi gestire la verità! - Codice d'onore",
+                "Eccoci, ragazzo. - Casablanca",
+                "Bond. James Bond. - Dr. No",
+                "Torno subito. - Il Terminatore",
+                "Continua a nuotare. - Alla ricerca di Nemo",
+                "Verso l'infinito... e oltre! - Toy Story",
+                "Vedo gente morta. - Sesto senso",
+                "Houston, abbiamo un problema. - Apollo 13",
+                "Hasta la vista, baby. - Terminator 2 - Il giorno del giudizio",
+                "Sono il re del mondo! - Titanic",
+                "Perché così serio? - Il cavaliere oscuro",
+                "La vita è come una scatola di cioccolatini, non sai mai quello che ti capita. - Forrest Gump",
+                "Mi stai parlando a me? - Taxi Driver",
+                "Non puoi sederti con noi! - Mean Girls",
+                "Sono solo una ragazza, in piedi di fronte a un ragazzo, chiedendogli di amarla. - Notting Hill",
+                "Adoro l'odore del napalm al mattino. - Apocalypse Now",
+                "Dì 'ciao' al mio piccolo amico! - Scarface",
+                "Nessuno mette Baby in un angolo. - Dirty Dancing",
+                "Sento il bisogno - il bisogno di velocità! - Top Gun",
+                "Essere o non essere, questo è il problema. - Amleto",
+                "E.T. telefona casa. - E.T. l'extra-terrestre",
+                "Francamente, mio caro, me ne infischio. - Via col vento",
+                "Non c'è posto come casa. - Il mago di Oz",
+                "Facciamo un'offerta che non potrà rifiutare. - Il Padrino",
+                "Sono il re del mondo! - Titanic",
+                "Avanti, rendimi la giornata. - Colpo a sorpresa",
+                "Che la Forza sia con te. - Star Wars",
+                "Torno subito. - Il Terminatore",
+                "Tu non puoi gestire la verità! - Codice d'onore",
+                "Avrai bisogno di una barca più grande. - Lo squalo",
+                "Sono furioso, e non lo prenderò più! - Network",
+                "Eccoci, Johnny! - Shining",
+                "Eccoci, ragazzo. - Casablanca",
+                "Non ci si mette a piangere nel baseball! - Una lega a parte",
+                "Stella! Eh, Stella! - Un tram che si chiama desiderio",
+                "Vedo gente morta. - Sesto senso",
+                "Houston, abbiamo un problema. - Apollo 13",
+                "Non c'è posto come casa. - Il mago di Oz",
+                "Adoro l'odore del napalm al mattino. - Apocalypse Now",
+                "Mi hai avuto al 'ciao'. - Jerry Maguire",
+                "Hasta la vista, baby. - Terminator 2 - Il giorno del giudizio",
+                "Non puoi sederti con noi! - Mean Girls",
+                "Sono solo una ragazza, in piedi di fronte a un ragazzo, chiedendogli di amarla. - Notting Hill",
+                "Sento il bisogno - il bisogno di velocità! - Top Gun",
+                "Mi stai parlando a me? - Taxi Driver",
+                "Sono il re del mondo! - Titanic",
+                "Perché così serio? - Il cavaliere oscuro",
+                "La vita è come una scatola di cioccolatini, non sai mai quello che ti capita. - Forrest Gump",
+                "Mi stai parlando a me? - Taxi Driver",
+                "Non puoi sederti con noi! - Mean Girls",
+                "Mi hai avuto al 'ciao'. - Jerry Maguire",
+                "Essere o non essere, questo è il problema. - Amleto",
+                "Avrai bisogno di una barca più grande. - Lo squalo",
+                "Perché così serio? - Il cavaliere oscuro",
+                "Avanti, rendimi la giornata. - Colpo a sorpresa",
+                "Che la Forza sia con te. - Star Wars",
+                "Torno subito. - Il Terminatore",
+                "Tu non puoi gestire la verità! - Codice d'onore",
+                "Avrai bisogno di una barca più grande. - Lo squalo",
+                "Sono furioso, e non lo prenderò più! - Network",
+                "Eccoci, Johnny! - Shining",
+                "Eccoci, ragazzo. - Casablanca",
+                "Non ci si mette a piangere nel baseball! - Una lega a parte",
+                "Stella! Eh, Stella! - Un tram che si chiama desiderio",
+                "Vedo gente morta. - Sesto senso",
+                "Houston, abbiamo un problema. - Apollo 13",
+                "Non c'è posto come casa. - Il mago di Oz",
+                "Adoro l'odore del napalm al mattino. - Apocalypse Now",
+                "Mi hai avuto al 'ciao'. - Jerry Maguire",
+                "Hasta la vista, baby. - Terminator 2 - Il giorno del giudizio",
+                "Non puoi sederti con noi! - Mean Girls",
+                "Sono solo una ragazza, in piedi di fronte a un ragazzo, chiedendogli di amarla. - Notting Hill",
+                "Sento il bisogno - il bisogno di velocità! - Top Gun",
+                "Mi stai parlando a me? - Taxi Driver"
+              ]
         }
     },
     computed: {
@@ -269,8 +347,13 @@ createApp({
         },
         /* formula per aggiungere i messaggi alla chat una volta inviati e far partire la risposta automatica */
         addMessage() {
-            if (this.newMessage !== '' && this.newMessage.length >= 5) {
-                this.contacts[this.currentContactIndex].messages.push({date: DateTime.now().toFormat('dd/MM/yyyy HH:mm:ss'), message: this.newMessage, status: 'sent', dropdownOpen: false});
+            if (this.newMessage !== '' && this.newMessage.length >= 3) {
+                this.contacts[this.currentContactIndex].messages.push({
+                    date: DateTime.now().toFormat('dd/MM/yyyy HH:mm:ss'), 
+                    message: this.newMessage, 
+                    status: 'sent', 
+                    dropdownOpen: false
+                });
                 setTimeout(() => {this.friendMessage()}, 1000)
             }
             this.newMessage = ''; //reimposta il campo invio dei messaggi a vuoto una volta mandato il messaggio
@@ -278,8 +361,13 @@ createApp({
         },
         /* formula per l'aggiunta del messaggio di risposta automatico da parte del contatto a cui si è mandato un messaggio */
         friendMessage() {
-            
-            this.contacts[this.currentContactIndex].messages.push({date: DateTime.now().toFormat('dd/MM/yyyy HH:mm:ss'), message: 'okay!', status: 'received'});
+            let randomQuote = this.randomAnswerGenerator();
+            this.contacts[this.currentContactIndex].messages.push({
+                date: DateTime.now().toFormat('dd/MM/yyyy HH:mm:ss'), 
+                message: randomQuote, 
+                status: 'received',
+                dropdownOpen: false
+            });
             
         },
         /* formula per aprire e chiudere il menu a tendina */
@@ -289,8 +377,18 @@ createApp({
         /* formula per rimuovere i messaggi usando il menu a tendina */
         removeMessage(index) {
             this.contacts[this.currentContactIndex].messages.splice(index, 1);
+        },
+        randomAnswerGenerator() {
+            let min = 0;
+            let max = this.randomQuotes.length;
+            let randomNumber = Math.floor(Math.random() * (max - min)) + min;    
+            return this.randomQuotes[randomNumber];       
         }
     },
+    mounted () {
+        console.log(this.randomQuote[this.randomAnswerGenerator()]);
+        
+    }
 
         
 }).mount("#container");
