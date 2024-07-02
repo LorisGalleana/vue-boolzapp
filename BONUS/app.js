@@ -331,6 +331,7 @@ createApp({
             show: false,
             newName: '',
             newPhoto: '',
+            emptyPage: true,
             
         }
     },
@@ -345,6 +346,7 @@ createApp({
     methods: {
         /* funzione per selezionare quale chat aprire dalla lista dei contatti cliccando sopra al contatto corrispondente */
         selectContact(index) {
+            this.emptyPage = false;
             this.currentContactIndex = index;
         },
         /* formula per settare il formato HH:mm:ss tramite luxon */
@@ -354,7 +356,7 @@ createApp({
         },
         /* formula per aggiungere i messaggi alla chat una volta inviati e far partire la risposta automatica */
         addMessage() {
-            if (this.newMessage !== '' && this.newMessage.length >= 3) {
+            if (this.newMessage !== '' && this.newMessage.length >= 1) {
                 this.contacts[this.currentContactIndex].messages.push({
                     date: DateTime.now().toFormat('dd/MM/yyyy HH:mm:ss'), 
                     message: this.newMessage, 
