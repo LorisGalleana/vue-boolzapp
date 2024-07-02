@@ -100,9 +100,9 @@
                             <div class="friend-info" >
                                 <div class="name">{{contacts[currentContactIndex] ? contacts[currentContactIndex].name : ''}}</div>
                                 <div class="last-access">
-                                    <div v-if="isWriting">Sta scrivendo...</div>
-                                    <div v-else-if="isOnline">Online</div>
-                                    <div v-else>{{contacts.message ? contacts[currentContactIndex].messages[contacts[currentContactIndex].messages.length - 1].date   : " "}}</div> 
+                                    <!-- <div v-if="isWriting">Sta scrivendo...</div>
+                                    <div v-else-if="isOnline">Online</div> -->
+                                    <div >{{contacts.message ? contacts[currentContactIndex].messages[contacts[currentContactIndex].messages.length - 1].date : " "}}</div> 
                                 </div>
                             </div>
                         </div>
