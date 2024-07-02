@@ -143,7 +143,35 @@ COLORE MESSAGGI PERSONALI - tea green: rgb(213, 249, 186) */
     font-size: 24px;
     filter: opacity(0.5);
 }
-
+.new-contact {
+    width: 30vw;
+    height: 20vh;
+    background-color: white;
+    position: absolute;
+    top: 35%;
+    right: 15%;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5%;
+}
+.new-name {
+    margin-bottom: 4%;
+}
+.new-photo {
+    margin-bottom: 4%;
+}
+.new-name input[type="text"], .new-photo input[type="text"] {
+    width: 100%;
+    outline: none;
+}
+.add-new-contact {
+    text-align: center;
+}
+.add-new-contact button {
+    padding: 1%;
+}
 .friend-contact-container {
     display: flex;
     justify-content: space-between;

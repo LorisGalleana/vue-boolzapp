@@ -327,7 +327,10 @@ createApp({
             dropdownOpen: false, //status base per il menu a tendina per cancellare i messaggi, così che sia sempre chiuso finchè non clicchiamo sopra
             isWriting: false,
             isOnline: false,
-            message: ''
+            message: '',
+            show: false,
+            newName: '',
+            newPhoto: '',
             
         }
     },
@@ -410,8 +413,7 @@ createApp({
             } else {
                 this.contacts = []; 
             }
-        }
-        ,
+        },
         randomAnswerGenerator() {
             let min = 0;
             let max = this.randomQuotes.length;
@@ -424,7 +426,7 @@ createApp({
             } else {
               return text;
             }
-          },
+        },
         getLastMessage(friend) {
             if (friend.messages.length > 0) {
               const lastMessage = friend.messages[friend.messages.length - 1].message;
@@ -432,7 +434,32 @@ createApp({
             } else {
               return '';
             }
+        },
+        showPopup() {
+            this.show = true
+        },
+        closePopup() {
+            this.newName = document.querySelector('.new-name-input').value
+            this.newPhoto = document.querySelector('.new-photo-input').value
+            
+            if(this.newName !== '' && this.newPhoto !== '') {
+                this.contacts.unshift({
+                    name: this.newName,
+                    avatar: this.newPhoto,
+                    visible: true,
+                    messages: [],
+                })
+                this.show = false
+                this.newName = '';
+                this.newPhoto = '';
+            }
+            else {
+                this.show = false
+            }
+            
+            
         }
+        
     }
 
         

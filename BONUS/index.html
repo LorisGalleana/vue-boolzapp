@@ -36,8 +36,8 @@
                             <div class="name">Walker</div>
                         </div>
                         <div class="contact-icons">
-                            <div class="update">
-                                <i class="fa-solid fa-circle-notch"></i>
+                            <div class="add-contact" @click="showPopup">
+                                <i class="fa-solid fa-plus"></i>
                             </div>
                             <div class="archive">
                                 <i class="fa-solid fa-message"></i>
@@ -45,6 +45,11 @@
                             <div class="options">
                                 <i class="fa-solid fa-ellipsis-vertical"></i>
                             </div>
+                        </div>
+                        <div class="new-contact" :class="show ? '' : 'hide' ">
+                            <div class="new-name">Nome: <input class="new-name-input" type="text" name="" id="" placeholder="Inserire il nome del nuovo contatto" v-model="newName"></div>
+                            <div class="new-photo">Immagine profilo: <input class="new-photo-input" type="text" name="" id="" placeholder="Inserire link immagine del profilo" v-model="newPhoto"></div>
+                            <div class="add-new-contact"><button @click="closePopup">AGGIUNGI</button></div>
                         </div>
                     </div>
                 </div>
@@ -132,7 +137,6 @@
                         </div>
                     </div>
                 </div>
-                
                 <!-- barra per l'invio dei messaggi, a sinistra icona per le emoji e a destra microfono per mandare messaggi vocali -->
                 <div class="message-bar">
                     <div class="message-container">
