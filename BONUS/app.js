@@ -332,6 +332,7 @@ createApp({
             newName: '',
             newPhoto: '',
             emptyPage: true,
+            emptyList: false,
             
         }
     },
@@ -413,6 +414,10 @@ createApp({
                 this.contacts.splice(this.currentContactIndex, 1); // Rimuovi il contatto corrente dall'array principale
                 this.currentContactIndex = 0; // Rimetti l'indice del contatto attivo al primo della lista, se necessario
             } else {
+                
+                this.emptyList = true
+                this.emptyPage = true
+                this.dropdownOpen = false
                 this.contacts = []; 
             }
         },
@@ -454,6 +459,7 @@ createApp({
                 this.show = false
                 this.newName = '';
                 this.newPhoto = '';
+                this.emptyList = false;
             }
             else {
                 this.show = false

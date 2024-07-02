@@ -73,19 +73,22 @@
                 </div>
                 <!-- lista di conversazioni con almeno un messaggio -->
                 <div class="contact-list">
-                    <div class="friend-select" v-for="(friend, index) in filteredContacts" :key="index" @click="selectContact(index)">
-                        <div class="friend">
-                            <div class="photo">
-                                <img :src="friend ? friend.avatar : '' " alt="">
-                            </div>
-                            <div class="friend-info">
-                                <div class="name">{{friend ? friend.name : ''}} </div>
-                                <div class="last-message">{{friend ? getLastMessage(friend) : ''}}
+                    <div v-if="emptyList === false" class="not-empty">
+                        <div class="friend-select" v-for="(friend, index) in filteredContacts" :key="index" @click="selectContact(index)">
+                            <div class="friend">
+                                <div class="photo">
+                                    <img :src="friend ? friend.avatar : '' " alt="">
                                 </div>
+                                <div class="friend-info">
+                                    <div class="name">{{friend ? friend.name : ''}} </div>
+                                    <div class="last-message">{{friend ? getLastMessage(friend) : ''}}
+                                    </div>
+                                </div>
+                                <div class="hour-message">{{message ? formatTime(friend.messages[friend.messages.length - 1].date)   : " "}}</div>
                             </div>
-                            <div class="hour-message">{{message ? formatTime(friend.messages[friend.messages.length - 1].date)   : " "}}</div>
                         </div>
                     </div>
+                    <div v-else></div>
                 </div>
             </div>
             <!-- area principale a destra che mostra la chat con il contatto selezionato -->
